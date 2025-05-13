@@ -222,7 +222,7 @@ namespace WixSharp.UI
             {
                 if (i > 3) return null;
 
-                res[i++] = m.Value.Substring(m.Value.IndexOf(":") + 1).Trim();
+                res[i++] = m.Value.Substring(m.Value.IndexOf(':') + 1).Trim();
             }
 
             return res;
@@ -245,7 +245,7 @@ namespace WixSharp.UI
             {
                 if (i > 4) return null;
 
-                res[i++] = m.Value.Substring(m.Value.IndexOf(":") + 2).Trim();
+                res[i++] = m.Value.Substring(m.Value.IndexOf(':') + 2).Trim();
             }
 
             return res;

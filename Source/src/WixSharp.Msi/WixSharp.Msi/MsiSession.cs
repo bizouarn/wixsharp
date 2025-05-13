@@ -440,7 +440,7 @@ namespace WixSharp.UI
                         return (int)DialogResult.OK;
 
                     case MsiInstallMessage.ActionStart:
-                        this.CurrentActionName = message.Substring(message.LastIndexOf(".") + 1);
+                        this.CurrentActionName = message.Substring(message.LastIndexOf('.') + 1);
                         return (int)DialogResult.OK;
 
                     case MsiInstallMessage.CommonData:

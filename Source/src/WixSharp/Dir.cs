@@ -215,7 +215,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of the contained nested <see cref="Dir"/>s (subdirectories).
         /// </summary>
-        public Dir[] Dirs = new Dir[0];
+        public Dir[] Dirs = Array.Empty<Dir>();
 
         internal Dir AutoParent;
 
@@ -240,7 +240,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of the contained <see cref="File"/>s.
         /// </summary>
-        public File[] Files = new File[0];
+        public File[] Files = Array.Empty<File>();
 
         /// <summary>
         /// Collection of the <see cref="DirFiles"/> objects. <see cref="DirFiles"/> type is used to specify files
@@ -251,7 +251,7 @@ namespace WixSharp
         /// not only a single level directory but all subdirectories as well.
         /// </para>
         /// </summary>
-        public DirFiles[] DirFileCollections = new DirFiles[0];
+        public DirFiles[] DirFileCollections = Array.Empty<DirFiles>();
 
         /// <summary>
         /// Collection of the <see cref="Files"/> objects. <see cref="Files"/> type is used to specify files
@@ -261,37 +261,37 @@ namespace WixSharp
         /// of a single level directory.
         /// </para>
         /// </summary>
-        public Files[] FileCollections = new Files[0];
+        public Files[] FileCollections = Array.Empty<Files>();
 
         /// <summary>
         /// Collection of WiX/MSI <see cref="ODBCDataSource"/> objects to be created during the installed.
         /// </summary>
-        public ODBCDataSource[] ODBCDataSources = new ODBCDataSource[0];
+        public ODBCDataSource[] ODBCDataSources = Array.Empty<ODBCDataSource>();
 
         /// <summary>
         /// Collection of WiX/MSI <see cref="IISVirtualDir"/> objects to be created during the installed.
         /// </summary>
-        public IISVirtualDir[] IISVirtualDirs = new IISVirtualDir[0];
+        public IISVirtualDir[] IISVirtualDirs = Array.Empty<IISVirtualDir>();
 
         /// <summary>
         /// Collection of the user defined <see cref="IGenericEntity"/> items.
         /// </summary>
-        public IGenericEntity[] GenericItems = new IGenericEntity[0];
+        public IGenericEntity[] GenericItems = Array.Empty<IGenericEntity>();
 
         /// <summary>
         /// Collection of the contained <see cref="Merge"/> modules.
         /// </summary>
-        public Merge[] MergeModules = new Merge[0];
+        public Merge[] MergeModules = Array.Empty<Merge>();
 
         /// <summary>
         /// Collection of the contained <see cref="ExeFileShortcut"/>s.
         /// </summary>
-        public ExeFileShortcut[] Shortcuts = new ExeFileShortcut[0];
+        public ExeFileShortcut[] Shortcuts = Array.Empty<ExeFileShortcut>();
 
         /// <summary>
         /// Collection of directory permissions to be applied to this directory.
         /// </summary>
-        public DirPermission[] Permissions = new DirPermission[0];
+        public DirPermission[] Permissions = Array.Empty<DirPermission>();
 
         /// <summary>
         /// Indicates if the directory is an installation directory.

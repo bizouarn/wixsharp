@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -106,7 +107,7 @@ namespace WixSharp
         /// <summary>
         /// The nested WixEntities that are to be converted int0 nested XML nodes at compile time.
         /// </summary>
-        public IGenericEntity[] Children = new IGenericEntity[0];
+        public IGenericEntity[] Children = Array.Empty<IGenericEntity>();
 
         /// <summary>
         /// Adds itself as an XML content (element of the specified name) into the WiX source being

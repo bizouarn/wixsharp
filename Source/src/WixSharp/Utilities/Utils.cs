@@ -47,7 +47,7 @@ namespace WixSharp
             {
                 return GetRefAssemblies(System.Reflection.Assembly.LoadFrom(assembly));
             }
-            catch { return new string[0]; }
+            catch { return Array.Empty<string>(); }
         }
 
         public static string[] GetRefAssemblies(this System.Reflection.Assembly assembly)

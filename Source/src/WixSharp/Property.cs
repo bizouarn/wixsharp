@@ -27,6 +27,8 @@ THE SOFTWARE.
 
 #endregion Licence...
 
+using System;
+
 namespace WixSharp
 {
     /// <summary>
@@ -181,7 +183,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of the nested user defined <see cref="IGenericEntity"/> items.
         /// </summary>
-        public IGenericEntity[] GenericItems = new IGenericEntity[0];
+        public IGenericEntity[] GenericItems = Array.Empty<IGenericEntity>();
 
         /// <summary>
         /// The flag indicating if the property needs to be 'preserved' for use with the deferred custom actions.

@@ -330,7 +330,7 @@ namespace WixSharp
         /// <summary>
         /// The URL reservations associated with the service
         /// </summary>
-        public IGenericEntity[] UrlReservations = new IGenericEntity[0];
+        public IGenericEntity[] UrlReservations = Array.Empty<IGenericEntity>();
 
         private bool RequiresConfig()
         {

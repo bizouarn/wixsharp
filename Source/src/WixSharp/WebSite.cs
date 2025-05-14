@@ -244,7 +244,7 @@ namespace WixSharp
             }
         }
 
-        WebAddress[] addresses = new WebAddress[0];
+        WebAddress[] addresses = Array.Empty<WebAddress>();
     }
 
     /// <summary>

@@ -123,7 +123,7 @@ namespace WixSharp.Bootstrapper
         ///              ...
         /// </code>
         /// </example>
-        public Payload[] Payloads = new Payload[0];
+        public Payload[] Payloads = Array.Empty<Payload>();
 
         internal void EnsureId()
         {
@@ -387,7 +387,7 @@ namespace WixSharp.Bootstrapper
         /// </code>
         /// </example>
         [Obsolete("Use `Payloads` instead.")]
-        public RemotePayload[] RemotePayloads = new RemotePayload[0];
+        public RemotePayload[] RemotePayloads = Array.Empty<RemotePayload>();
 
         /// <summary>
         /// Emits WiX XML.
@@ -606,7 +606,7 @@ namespace WixSharp.Bootstrapper
         /// The remote payloads
         /// </summary>
         [Obsolete("Use `Payloads` instead.")]
-        public RemotePayload[] RemotePayloads = new RemotePayload[0];
+        public RemotePayload[] RemotePayloads = Array.Empty<RemotePayload>();
 
         /// <summary>
         /// Emits WiX XML.
@@ -677,7 +677,7 @@ namespace WixSharp.Bootstrapper
         /// The remote payloads
         /// </summary>
         [Obsolete("Use `Payloads` instead.")]
-        public RemotePayload[] RemotePayloads = new RemotePayload[0];
+        public RemotePayload[] RemotePayloads = Array.Empty<RemotePayload>();
 
         /// <summary>
         /// Emits WiX XML.

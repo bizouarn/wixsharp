@@ -3313,7 +3313,7 @@ namespace WixSharp
 
             PackageManagedAsm(asm,
                               nativeDll ?? asm.PathChangeExtension(".CA.dll"),
-                              refAssemblies ?? new string[0],
+                              refAssemblies ?? Array.Empty<string>(),
                               outDir ?? asm.PathGetDirName(),
                               configFilePath,
                               platform,
@@ -3336,7 +3336,7 @@ namespace WixSharp
         {
             nativeDll = nativeDll ?? IO.Path.ChangeExtension(asm, ".CA.dll");
 
-            PackageManagedAsm(asm, nativeDll ?? IO.Path.ChangeExtension(asm, ".CA.dll"), refAssemblies ?? new string[0], outDir ?? Environment.CurrentDirectory, configFilePath, platform, embeddedUI);
+            PackageManagedAsm(asm, nativeDll ?? IO.Path.ChangeExtension(asm, ".CA.dll"), refAssemblies ?? Array.Empty<string>(), outDir ?? Environment.CurrentDirectory, configFilePath, platform, embeddedUI);
             return IO.Path.GetFullPath(nativeDll);
         }
 

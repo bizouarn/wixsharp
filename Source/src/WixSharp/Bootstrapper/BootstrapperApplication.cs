@@ -438,7 +438,7 @@ namespace WixSharp.Bootstrapper
         /// <summary>
         /// Collection of paths to the package dependencies.
         /// </summary>
-        public Payload[] Payloads = new Payload[0];
+        public Payload[] Payloads = Array.Empty<Payload>();
 
         /// <summary>
         /// Adds the payload.
@@ -458,7 +458,7 @@ namespace WixSharp.Bootstrapper
         /// }
         /// </code>
         /// </example>
-        public Variable[] Variables = new Variable[0];
+        public Variable[] Variables = Array.Empty<Variable>();
     }
 
     /// <summary>

@@ -98,7 +98,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of WiX/MSI <see cref="Property"/> objects to be created during the installed.
         /// </summary>
-        public Property[] Properties = new Property[0];
+        public Property[] Properties = Array.Empty<Property>();
 
         void AddItems(WixEntity[] items)
         {

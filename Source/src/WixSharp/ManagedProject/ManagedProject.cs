@@ -628,7 +628,7 @@ namespace WixSharp
                 return result.ToArray();
             }
             else
-                return new string[0];
+                return Array.Empty<string>();
         }
 
         void InjectDialogs(string name, ManagedDialogs dialogs)

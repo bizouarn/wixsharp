@@ -27,6 +27,7 @@ THE SOFTWARE.
 
 #endregion Licence...
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -183,7 +184,7 @@ namespace WixSharp
         /// Windows Firewall the program is being installed on. For Windows XP SP2 and Windows Server 2003 SP1, see
         /// RemoteAddresses Property. For Windows Vista and Windows Server 2008, see RemoteAddresses Property.
         /// </summary>
-        public string[] RemoteAddress = new string[0];
+        public string[] RemoteAddress = Array.Empty<string>();
 
         /// <summary>
         /// Indicates whether the firewall exception should be enabled.

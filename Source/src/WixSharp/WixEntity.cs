@@ -202,7 +202,7 @@ namespace WixSharp
         /// is a more convenient choice as it can be initialized either via constructors or object initializers.eature.
         /// </remarks>
         /// </summary>
-        public Feature[] Features = new Feature[0];
+        public Feature[] Features = Array.Empty<Feature>();
 
         /// <summary>
         /// Gets the actual list of features associated with the Wix object/element. It is a combined

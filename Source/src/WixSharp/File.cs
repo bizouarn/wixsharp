@@ -167,7 +167,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of the <see cref="FileAssociation"/>s associated with the file.
         /// </summary>
-        public FileAssociation[] Associations = new FileAssociation[0];
+        public FileAssociation[] Associations = Array.Empty<FileAssociation>();
 
         /// <summary>
         /// The service installer associated with the file.
@@ -199,12 +199,12 @@ namespace WixSharp
         /// <summary>
         /// Collection of the contained <see cref="IISVirtualDir"/>s.
         /// </summary>
-        public IISVirtualDir[] IISVirtualDirs = new IISVirtualDir[0];
+        public IISVirtualDir[] IISVirtualDirs = Array.Empty<IISVirtualDir>();
 
         /// <summary>
         /// Collection of the <see cref="Shortcut"/>s associated with the file.
         /// </summary>
-        public FileShortcut[] Shortcuts = new FileShortcut[0];
+        public FileShortcut[] Shortcuts = Array.Empty<FileShortcut>();
 
         /// <summary>
         /// Defines the installation <see cref="Condition"/>, which is to be checked during the installation to
@@ -229,7 +229,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of <see cref="T:WixSharp.FilePermission" /> to be applied to the file.
         /// </summary>
-        public FilePermission[] Permissions = new FilePermission[0];
+        public FilePermission[] Permissions = Array.Empty<FilePermission>();
 
         /// <summary>
         /// Collection of <see cref="T:WixSharp.FirewallException" /> to be applied to the file.
@@ -243,12 +243,12 @@ namespace WixSharp
         /// <summary>
         /// DCOM AppIds associated with this file.
         /// </summary>
-        public AppId[] AppIds = new AppId[0];
+        public AppId[] AppIds = Array.Empty<AppId>();
 
         /// <summary>
         /// Collection of <see cref="T:WixSharp.IGenericEntity" /> to be applied to the file.
         /// </summary>
-        public IGenericEntity[] GenericItems = new IGenericEntity[0];
+        public IGenericEntity[] GenericItems = Array.Empty<IGenericEntity>();
 
         /// <summary>
         /// Gets or sets the NeverOverwrite attribute of the associated WiX component.

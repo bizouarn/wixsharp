@@ -366,7 +366,7 @@ namespace WixSharp.Bootstrapper
         /// new MsiPackage(msiFile) { MsiProperties = "FULL=[FullInstall]" },
         /// </code>
         /// </example>
-        public Variable[] Variables = new Variable[0];
+        public Variable[] Variables = Array.Empty<Variable>();
 
         /// <summary>
         /// The target platform type.

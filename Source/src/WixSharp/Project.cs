@@ -580,32 +580,32 @@ namespace WixSharp
         /// <summary>
         /// Collection of <see cref="Dir"/>s to be installed.
         /// </summary>
-        public Dir[] Dirs = new Dir[0];
+        public Dir[] Dirs = Array.Empty<Dir>();
 
         /// <summary>
         /// Collection of <see cref="Actions"/>s to be performed during the installation.
         /// </summary>
-        public Action[] Actions = new Action[0];
+        public Action[] Actions = Array.Empty<Action>();
 
         /// <summary>
         /// Collection of <see cref="RegValue"/>s to be set during the installation.
         /// </summary>
-        public RegValue[] RegValues = new RegValue[0];
+        public RegValue[] RegValues = Array.Empty<RegValue>();
 
         /// <summary>
         /// Collection of <see cref="UrlReservation"/> to be installed.
         /// </summary>
-        public UrlReservation[] UrlReservations = new UrlReservation[0];
+        public UrlReservation[] UrlReservations = Array.Empty<UrlReservation>();
 
         /// <summary>
         /// Collection of the user defined <see cref="IGenericEntity"/> items.
         /// </summary>
-        public IGenericEntity[] GenericItems = new IGenericEntity[0];
+        public IGenericEntity[] GenericItems = Array.Empty<IGenericEntity>();
 
         /// <summary>
         /// Collection of WiX/MSI <see cref="Property"/> objects to be created during the installed.
         /// </summary>
-        public Property[] Properties = new Property[0];
+        public Property[] Properties = Array.Empty<Property>();
 
         /// <summary>
         /// Indicates whether compiler should emit consistent package Id (package code). Set <c>EmitConsistentPackageId</c> to 'false' (default value) if
@@ -633,7 +633,7 @@ namespace WixSharp
         /// Normally you doe not need to deal with this property as <see cref="Compiler"/> will populate
         /// it automatically.
         /// </summary>
-        public Binary[] Binaries = new Binary[0];
+        public Binary[] Binaries = Array.Empty<Binary>();
 
         /// <summary>
         /// Collection of paths to the assemblies referenced by <see cref="ManagedAction"/>s.
@@ -777,8 +777,8 @@ namespace WixSharp
                 }
 
                 //clear resolved collections
-                dir.FileCollections = new Files[0];
-                dir.DirFileCollections = new DirFiles[0];
+                dir.FileCollections = Array.Empty<Files>();
+                dir.DirFileCollections = Array.Empty<DirFiles>();
 
                 iterator++;
             }

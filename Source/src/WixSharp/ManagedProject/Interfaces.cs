@@ -308,7 +308,7 @@ namespace WixSharp
                         Reflection.Assembly.Load("WixSharp.UI.WPF")
                         .GetType("WixSharp.UI.WPF.DependencyDescriptor")
                         .GetMethod("GetRefAssemblies")
-                        .Invoke(null, new object[0]);
+                        .Invoke(null, Array.Empty<object>());
 
                     var userContentDependencies = type.GenericTypeArguments
                                                       .Where(t => t.Implements(userContentInterfaceName))

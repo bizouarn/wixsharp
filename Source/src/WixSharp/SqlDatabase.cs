@@ -157,7 +157,7 @@ namespace WixSharp
         /// <summary>
         /// Collection of the nested user defined <see cref="IGenericEntity"/> items.
         /// </summary>
-        public IGenericEntity[] GenericItems = new IGenericEntity[0];
+        public IGenericEntity[] GenericItems = Array.Empty<IGenericEntity>();
 
         #region Wix SqlDatabase attributes
 

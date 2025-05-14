@@ -1464,7 +1464,7 @@ namespace WixSharp
             if (!IO.File.Exists(filePath))
             {
                 filePath.PathGetDirName().EnsureDirExists();
-                IO.File.WriteAllBytes(filePath, new byte[0]);
+                IO.File.WriteAllBytes(filePath, Array.Empty<byte>());
             }
             return path;
         }
@@ -2979,7 +2979,7 @@ namespace WixSharp
         public static Feature[] ToItems(this Feature feature)
         {
             if (feature == null)
-                return new Feature[0];
+                return Array.Empty<Feature>();
 
             if (feature is FeatureSet feature_set)
                 return feature_set.Items;

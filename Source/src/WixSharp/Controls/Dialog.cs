@@ -35,6 +35,7 @@
 
 #endregion Licence...
 
+using System;
 using System.Xml.Linq;
 
 namespace WixSharp.Controls
@@ -78,7 +79,7 @@ namespace WixSharp.Controls
         /// <summary>
         /// Collection of the contained nested <see cref="Control"/>s (UI elements).
         /// </summary>
-        public Control[] Controls = new Control[0];
+        public Control[] Controls = Array.Empty<Control>();
 
         /// <summary>
         /// Converts the <see cref="T:WixSharp.Dialog"/> instance into WiX <see cref="T:System.Xml.Linq.XElement"/>.

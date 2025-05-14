@@ -576,17 +576,17 @@ namespace WixSharp
         /// Extensibility point in the WiX XML Schema.
         /// Schema extensions can register additional attributes at this point in the schema.
         /// </summary>
-        public IGenericEntity[] GenericEntities = new IGenericEntity[0];
+        public IGenericEntity[] GenericEntities = Array.Empty<IGenericEntity>();
 
         /// <summary>
         /// MIME content-types for an <see cref="Extension"/>.
         /// </summary>
-        public MimeType[] MIMETypes = new MimeType[0];
+        public MimeType[] MIMETypes = Array.Empty<MimeType>();
 
         /// <summary>
         /// Verb definitions for an <see cref="Extension"/>.
         /// </summary>
-        public Verb[] Verbs = new Verb[0];
+        public Verb[] Verbs = Array.Empty<Verb>();
 
         /// <summary>
         /// Adds itself as an XML content into the WiX source being generated from the <see cref="Project" />.

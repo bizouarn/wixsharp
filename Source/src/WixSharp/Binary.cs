@@ -157,6 +157,6 @@ namespace WixSharp
         /// <summary>
         /// The referenced assemblies the EmbeddedAssembly depends on.
         /// </summary>
-        public string[] RefAssemblies = new string[0];
+        public string[] RefAssemblies = Array.Empty<string>();
     }
 }

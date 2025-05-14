@@ -105,7 +105,7 @@ namespace WixSharp
         /// <returns></returns>
         public static XAttribute[] MapToXmlAttributes(this object obj)
         {
-            var emptyArgs = new object[0];
+            var emptyArgs = Array.Empty<object>();
 
             var result = new List<XAttribute>();
 
@@ -178,7 +178,7 @@ namespace WixSharp
 
         static XCData MapToXmlCData(this object obj)
         {
-            var emptyArgs = new object[0];
+            var emptyArgs = Array.Empty<object>();
 
             XCData result = null;
 

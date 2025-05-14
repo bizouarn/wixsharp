@@ -571,7 +571,7 @@ namespace WixSharp
         /// Collection of path strings for dependency assemblies to be included in MSI. <c>RefAssemblies</c> should be used if the Managed CustomAction
         /// depends on any assembly, which will not be registered with GAC on the target system.
         /// </summary>
-        public string[] RefAssemblies = new string[0];
+        public string[] RefAssemblies = Array.Empty<string>();
 
         internal int GetRefAssembliesHashCode(IEnumerable<string> defaultAssemblies)
         {

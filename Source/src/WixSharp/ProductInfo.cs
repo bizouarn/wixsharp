@@ -126,7 +126,7 @@ namespace WixSharp
 
             foreach (PropertyInfo prop in this.GetType().GetProperties())
             {
-                object value = prop.GetValue(this, new object[0]);
+                object value = prop.GetValue(this, Array.Empty<object>());
 
                 if (value != null)
                 {

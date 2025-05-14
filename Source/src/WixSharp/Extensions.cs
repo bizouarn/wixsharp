@@ -1565,7 +1565,7 @@ namespace WixSharp
         public static string Expand(this string path, bool doNotFixStartDigit = false)
         {
             var result = path.ExpandWixEnvConsts()
-                             .Replace("\\", ".")
+                             .Replace('\\', '.')
                              .EscapeIllegalCharacters(doNotFixStartDigit);
 
             if (result.FirstOrDefault() == '.')
@@ -2382,7 +2382,7 @@ namespace WixSharp
         /// <returns>Valid WiX identifier.</returns>
         internal static string ToWString(this Sequence value)
         {
-            return value.ToString().Replace(" ", "_");
+            return value.ToString().Replace(' ', '_');
         }
 
         /// <summary>
@@ -2392,7 +2392,7 @@ namespace WixSharp
         /// <returns>Valid WiX identifier.</returns>
         internal static string ToWString(this string value)
         {
-            return value.Replace(" ", "_");
+            return value.Replace(' ', '_');
         }
 
         /// <summary>

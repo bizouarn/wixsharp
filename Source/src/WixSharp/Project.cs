@@ -124,26 +124,25 @@ namespace WixSharp
             foreach (WixObject obj in items)
             {
                 var rawItems = new List<WixObject>();
-                if (obj is WixItems)
-                    rawItems.AddRange((obj as WixItems).Items);
+                if (obj is WixItems wixItems)
+                    rawItems.AddRange(wixItems.Items);
                 else
                     rawItems.Add(obj);
 
                 foreach (WixObject item in rawItems)
                 {
-                    if (item is LaunchCondition)
-                        LaunchConditions.Add(item as LaunchCondition);
-                    else if (item is Dir)
-                        dirs.Add(item as Dir);
-                    else if (item is Action)
-                        actions.Add(item as Action);
-                    else if (item is RegValue)
-                        regs.Add(item as RegValue);
+                    if (item is LaunchCondition condition)
+                        LaunchConditions.Add(condition);
+                    else if (item is Dir dir)
+                        dirs.Add(dir);
+                    else if (item is Action action)
+                        actions.Add(action);
+                    else if (item is RegValue value)
+                        regs.Add(value);
                     else if (item is RegKey regkey)
                         regs.AddRange(regkey.GetValues());
-                    else if (item is RegFile)
+                    else if (item is RegFile file)
                     {
-                        var file = item as RegFile;
                         var values = Tasks.ImportRegFile(file.Path);
                         if (file.ActualFeatures.Any())
                             values.ForEach(x =>
@@ -155,14 +154,14 @@ namespace WixSharp
                     }
                     else if (item is Property || item is PropertyRef)
                         props.Add(item as Property);
-                    else if (item is Binary)
-                        bins.Add(item as Binary);
-                    else if (item is WixGuid)
-                        GUID = (item as WixGuid).Value;
-                    else if (item is Media)
-                        Media.Add(item as Media);
-                    else if (item is IGenericEntity)
-                        genericItems.Add(item as IGenericEntity);
+                    else if (item is Binary binary)
+                        bins.Add(binary);
+                    else if (item is WixGuid wixGuid)
+                        GUID = wixGuid.Value;
+                    else if (item is Media media)
+                        Media.Add(media);
+                    else if (item is IGenericEntity entity)
+                        genericItems.Add(entity);
                     else
                         throw new Exception("Unexpected object type is among Project constructor arguments: " + item.GetType().Name);
                 }
@@ -755,9 +754,9 @@ namespace WixSharp
                 {
                     foreach (WixEntity item in dirItems.GetAllItems(SourceBaseDir, dir))
                     {
-                        if (item is DirFiles)
+                        if (item is DirFiles files)
                         {
-                            dirList[iterator].AddDirFileCollection(item as DirFiles);
+                            dirList[iterator].AddDirFileCollection(files);
                         }
                         else if (item is Dir discoveredDir && !dir.Dirs.Contains(item))
                         {

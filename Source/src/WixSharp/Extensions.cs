@@ -467,7 +467,7 @@ namespace WixSharp
         /// <returns></returns>
         public static XElement SetAttribute(this XElement obj, XName name, object value)
         {
-            if (value is string && (value as string).IsEmpty())
+            if (value is string str && str.IsEmpty())
             {
                 obj.SetAttributeValue(name, null);
             }
@@ -476,9 +476,8 @@ namespace WixSharp
                 var attrValue = (bool?)value;
                 obj.SetAttributeValue(name, attrValue.ToNullOrYesNo());
             }
-            else if (value is bool)
+            else if (value is bool attrValue)
             {
-                var attrValue = (bool)value;
                 obj.SetAttributeValue(name, attrValue.ToYesNo());
             }
             else

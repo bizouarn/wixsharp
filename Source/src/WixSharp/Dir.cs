@@ -380,26 +380,26 @@ namespace WixSharp
             var iisVirtualDirs = new List<IISVirtualDir>();
 
             foreach (WixEntity item in items)
-                if (item is Dir)
-                    dirs.Add(item as Dir);
-                else if (item is File)
-                    files.Add(item as File);
-                else if (item is DirFiles)
-                    fileCollections.Add(item as DirFiles);
-                else if (item is Files)
-                    dirItemsCollections.Add(item as Files);
-                else if (item is IGenericEntity)
-                    genericItems.Add(item as IGenericEntity);
-                else if (item is ExeFileShortcut)
-                    shortcuts.Add(item as ExeFileShortcut);
-                else if (item is Merge)
-                    mergeModules.Add(item as Merge);
-                else if (item is DirPermission)
-                    dirPermissions.Add(item as DirPermission);
-                else if (item is ODBCDataSource)
-                    odbcSources.Add(item as ODBCDataSource);
-                else if (item is IISVirtualDir)
-                    iisVirtualDirs.Add(item as IISVirtualDir);
+                if (item is Dir dir)
+                    dirs.Add(dir);
+                else if (item is File file)
+                    files.Add(file);
+                else if (item is DirFiles dirFiles)
+                    fileCollections.Add(dirFiles);
+                else if (item is Files item1)
+                    dirItemsCollections.Add(item1);
+                else if (item is IGenericEntity entity)
+                    genericItems.Add(entity);
+                else if (item is ExeFileShortcut shortcut)
+                    shortcuts.Add(shortcut);
+                else if (item is Merge merge)
+                    mergeModules.Add(merge);
+                else if (item is DirPermission permission)
+                    dirPermissions.Add(permission);
+                else if (item is ODBCDataSource source)
+                    odbcSources.Add(source);
+                else if (item is IISVirtualDir virtualDir)
+                    iisVirtualDirs.Add(virtualDir);
                 else if (item is null)
                     continue;
                 else

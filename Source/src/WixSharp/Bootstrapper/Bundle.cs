@@ -431,7 +431,7 @@ namespace WixSharp.Bootstrapper
             var customBA = this.Application as ManagedBootstrapperApplication;
             if (customBA != null && customBA.GetType().Name != "SilentBootstrapperApplication")
             {
-                var msiPackages = this.Chain.Where(x => (x is MsiPackage) && (x as MsiPackage).DisplayInternalUI == true);
+                var msiPackages = this.Chain.Where(x => (x is MsiPackage package) && package.DisplayInternalUI == true);
 
                 if (msiPackages.Any())
                 {

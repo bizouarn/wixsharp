@@ -1346,10 +1346,8 @@ namespace WixSharp
             if (project.EmbeddedUI != null)
             {
                 string bynaryPath = project.EmbeddedUI.Name;
-                if (project.EmbeddedUI is EmbeddedAssembly)
+                if (project.EmbeddedUI is EmbeddedAssembly asmBin)
                 {
-                    var asmBin = project.EmbeddedUI as EmbeddedAssembly;
-
                     bynaryPath = asmBin.Name.PathChangeDirectory(project.OutDir.PathGetFullPath())
                                             .PathChangeExtension(".CA.dll");
 
@@ -1801,9 +1799,8 @@ namespace WixSharp
                                      On=both");
                 }
 
-                if (wFile is FontFile)
+                if (wFile is FontFile font)
                 {
-                    var font = (wFile as FontFile);
                     file.SetAttribute("TrueType", font.TrueType)
                         .SetAttribute("FontTitle", font.FontTitle);
                 }
@@ -2607,20 +2604,16 @@ namespace WixSharp
 
             foreach (var prop in properties)
             {
-                if (prop is PropertyRef)
+                if (prop is PropertyRef propRef)
                 {
-                    var propRef = (prop as PropertyRef);
-
                     if (propRef.Id.IsEmpty())
                         throw new Exception("'" + typeof(PropertyRef).Name + "'.Id must be set before compiling the project.");
 
                     product.Add(new XElement("PropertyRef",
                                     new XAttribute("Id", propRef.Id)));
                 }
-                else if (prop is RegValueProperty)
+                else if (prop is RegValueProperty rvProp)
                 {
-                    var rvProp = (prop as RegValueProperty);
-
                     XElement RegistrySearchElement;
                     XElement xProp = product.AddElement(
                                 new XElement("Property",
@@ -2685,10 +2678,8 @@ namespace WixSharp
                 string bynaryKey = bin.Id;
                 string bynaryPath = Utils.PathCombine(wProject.SourceBaseDir, bin.Name);
 
-                if (bin is EmbeddedAssembly)
+                if (bin is EmbeddedAssembly asmBin)
                 {
-                    var asmBin = bin as EmbeddedAssembly;
-
                     bynaryPath = asmBin.Name.PathChangeDirectory(wProject.OutDir.PathGetFullPath())
                                             .PathChangeExtension(".CA.dll");
 
@@ -2782,10 +2773,8 @@ namespace WixSharp
                                          new XAttribute("Action", actionId),
                                          sequenceNumberAttr)));
                 }
-                else if (wAction is ScriptFileAction)
+                else if (wAction is ScriptFileAction action)
                 {
-                    var wScriptAction = (ScriptFileAction)wAction;
-
                     sequences.ForEach(sequence =>
                          sequence.Add(new XElement("Custom",
                                           new XAttribute("Condition", wActionCondition),
@@ -2793,19 +2782,19 @@ namespace WixSharp
                                           sequenceNumberAttr)));
 
                     product.Add(new XElement("Binary",
-                                    new XAttribute("Id", wAction.Name.Expand() + "_File"),
-                                    new XAttribute("SourceFile", Utils.PathCombine(wProject.SourceBaseDir, wScriptAction.ScriptFile))));
+                                    new XAttribute("Id", action.Name.Expand() + "_File"),
+                                    new XAttribute("SourceFile", Utils.PathCombine(wProject.SourceBaseDir, action.ScriptFile))));
 
                     product.Add(new XElement("CustomAction",
-                                    new XAttribute("Id", wAction.Id),
-                                    new XAttribute(CABinarykeyAttrName, wAction.Name.Expand() + "_File"),
-                                    new XAttribute("VBScriptCall", wScriptAction.Procedure))
-                                    .SetAttribute("Return", wAction.Return)
-                                    .SetAttribute("Impersonate", wAction.Impersonate)
-                                    .SetAttribute("Execute", wAction.Execute)
-                                    .AddAttributes(wAction.Attributes));
+                                    new XAttribute("Id", action.Id),
+                                    new XAttribute(CABinarykeyAttrName, action.Name.Expand() + "_File"),
+                                    new XAttribute("VBScriptCall", action.Procedure))
+                                    .SetAttribute("Return", action.Return)
+                                    .SetAttribute("Impersonate", action.Impersonate)
+                                    .SetAttribute("Execute", action.Execute)
+                                    .AddAttributes(action.Attributes));
 
-                    if ((wScriptAction.Execute == Execute.deferred) && wScriptAction.Rollback.IsNotEmpty())
+                    if ((action.Execute == Execute.deferred) && action.Rollback.IsNotEmpty())
                     {
                         sequences.ForEach(sequence =>
                             sequence.Add(new XElement("Custom",
@@ -2815,18 +2804,16 @@ namespace WixSharp
 
                         product.AddElement(new XElement("CustomAction",
                                 new XAttribute("Id", roollbackActionId),
-                                new XAttribute(CABinarykeyAttrName, wAction.Name.Expand() + "_File"),
-                                new XAttribute("VBScriptCall", wScriptAction.RollbackArg))
-                            .SetAttribute("Return", wAction.Return)
-                            .SetAttribute("Impersonate", wAction.Impersonate)
+                                new XAttribute(CABinarykeyAttrName, action.Name.Expand() + "_File"),
+                                new XAttribute("VBScriptCall", action.RollbackArg))
+                            .SetAttribute("Return", action.Return)
+                            .SetAttribute("Impersonate", action.Impersonate)
                             .SetAttribute("Execute", Execute.rollback)
-                            .AddAttributes(wAction.Attributes));
+                            .AddAttributes(action.Attributes));
                     }
                 }
-                else if (wAction is ScriptAction)
+                else if (wAction is ScriptAction wScriptAction)
                 {
-                    var wScriptAction = (ScriptAction)wAction;
-
                     sequences.ForEach(sequence =>
                         sequence.Add(new XElement("Custom",
                                        wAction.ToXmlCondition(),
@@ -2835,12 +2822,12 @@ namespace WixSharp
 
                     product.Add(new XElement("CustomAction",
                                     new XCData(wScriptAction.Code),
-                                    new XAttribute("Id", wAction.Id),
+                                    new XAttribute("Id", wScriptAction.Id),
                                     new XAttribute("Script", "vbscript"))
-                                    .SetAttribute("Return", wAction.Return)
-                                    .SetAttribute("Impersonate", wAction.Impersonate)
-                                    .SetAttribute("Execute", wAction.Execute)
-                                    .AddAttributes(wAction.Attributes));
+                                    .SetAttribute("Return", wScriptAction.Return)
+                                    .SetAttribute("Impersonate", wScriptAction.Impersonate)
+                                    .SetAttribute("Execute", wScriptAction.Execute)
+                                    .AddAttributes(wScriptAction.Attributes));
 
                     if ((wScriptAction.Execute == Execute.deferred) && wScriptAction.Rollback.IsNotEmpty())
                     {
@@ -2853,15 +2840,14 @@ namespace WixSharp
                         product.AddElement(new XElement("CustomAction",
                                 new XCData(wScriptAction.RollbackArg),
                                 new XAttribute("Id", roollbackActionId))
-                            .SetAttribute("Return", wAction.Return)
-                            .SetAttribute("Impersonate", wAction.Impersonate)
+                            .SetAttribute("Return", wScriptAction.Return)
+                            .SetAttribute("Impersonate", wScriptAction.Impersonate)
                             .SetAttribute("Execute", Execute.rollback)
-                            .AddAttributes(wAction.Attributes));
+                            .AddAttributes(wScriptAction.Attributes));
                     }
                 }
-                else if (wAction is ManagedAction)
+                else if (wAction is ManagedAction wManagedAction)
                 {
-                    var wManagedAction = (ManagedAction)wAction;
                     var asmFile = Utils.PathCombine(wProject.SourceBaseDir, wManagedAction.ActionAssembly);
                     var packageFile = asmFile.PathChangeDirectory(wProject.OutDir.PathGetFullPath())
                                              .PathChangeExtension(".CA.dll");
@@ -2902,7 +2888,7 @@ namespace WixSharp
                             nativeCAdll = packageFile;
                         }
 
-                        bynaryKey = wAction.Name.Expand() + "_File";
+                        bynaryKey = wManagedAction.Name.Expand() + "_File";
                         product.Add(new XElement("Binary",
                                         new XAttribute("Id", bynaryKey),
                                         new XAttribute("SourceFile", nativeCAdll)));
@@ -2919,19 +2905,19 @@ namespace WixSharp
 
                         if (!mapping.IsEmpty())
                         {
-                            var setPropValuesId = "Set_" + wAction.Id + "_Props";
+                            var setPropValuesId = "Set_" + wManagedAction.Id + "_Props";
 
                             product.Add(new XElement("CustomAction",
                                             new XAttribute("Id", setPropValuesId),
-                                            new XAttribute("Property", wAction.Id),
+                                            new XAttribute("Property", wManagedAction.Id),
                                             new XAttribute("Value", mapping)));
 
-                            var stepAttr = wAction.SequenceNumber.HasValue ?
-                                                    new XAttribute("Sequence", wAction.SequenceNumber.Value) :
+                            var stepAttr = wManagedAction.SequenceNumber.HasValue ?
+                                                    new XAttribute("Sequence", wManagedAction.SequenceNumber.Value) :
                                                     new XAttribute("After", "InstallInitialize");
 
 
-                            if (AutoElements.ScheduleDeferredActionsAfterTunnelingTheirProperties || wAction.RawId == nameof(ManagedProjectActions.WixSharp_AfterInstall_Action))
+                            if (AutoElements.ScheduleDeferredActionsAfterTunnelingTheirProperties || wManagedAction.RawId == nameof(ManagedProjectActions.WixSharp_AfterInstall_Action))
                             {
                                 // Inject fetching properties CA just before the deferred action AfterInstrallEventHandler.
                                 // This might be a good practice to do for all deferred actions. However it's hard to predict the
@@ -2955,13 +2941,13 @@ namespace WixSharp
                                                            sequenceNumberAttr)));
 
                     product.Add(new XElement("CustomAction",
-                                    new XAttribute("Id", wAction.Id),
+                                    new XAttribute("Id", wManagedAction.Id),
                                     new XAttribute(CABinarykeyAttrName, bynaryKey),
                                     new XAttribute("DllEntry", wManagedAction.MethodName))
-                                    .SetAttribute("Return", wAction.Return)
-                                    .SetAttribute("Impersonate", wAction.Impersonate)
-                                    .SetAttribute("Execute", wAction.Execute)
-                                    .AddAttributes(wAction.Attributes));
+                                    .SetAttribute("Return", wManagedAction.Return)
+                                    .SetAttribute("Impersonate", wManagedAction.Impersonate)
+                                    .SetAttribute("Execute", wManagedAction.Execute)
+                                    .AddAttributes(wManagedAction.Attributes));
 
                     if ((wManagedAction.Execute == Execute.deferred) && wManagedAction.Rollback.IsNotEmpty())
                     {
@@ -2988,15 +2974,14 @@ namespace WixSharp
                                     new XAttribute("Id", roollbackActionId),
                                     new XAttribute(CABinarykeyAttrName, bynaryKey),
                                     new XAttribute("DllEntry", wManagedAction.Rollback))
-                                .SetAttribute("Return", wAction.Return)
-                                .SetAttribute("Impersonate", wAction.Impersonate)
+                                .SetAttribute("Return", wManagedAction.Return)
+                                .SetAttribute("Impersonate", wManagedAction.Impersonate)
                                 .SetAttribute("Execute", Execute.rollback)
-                                .AddAttributes(wAction.Attributes));
+                                .AddAttributes(wManagedAction.Attributes));
                     }
                 }
-                else if (wAction is CustomActionRef)
+                else if (wAction is CustomActionRef wCustomActionRef)
                 {
-                    var wCustomActionRef = (CustomActionRef)wAction;
                     sequences.ForEach(sequence =>
                         sequence.Add(new XElement("Custom",
                             new XAttribute("Condition", wActionCondition),
@@ -3006,16 +2991,15 @@ namespace WixSharp
                     product.Add(new XElement("CustomActionRef",
                         new XAttribute("Id", wCustomActionRef.Id)));
                 }
-                else if (wAction is WixQuietExecAction)
+                else if (wAction is WixQuietExecAction quietExecAction)
                 {
-                    var quietExecAction = (WixQuietExecAction)wAction;
-                    var cmdLineActionId = wAction.Id;
+                    var cmdLineActionId = quietExecAction.Id;
                     var setCmdLineActionId = "Set_" + cmdLineActionId;
 
                     product.AddElement(
                         new XElement("CustomAction")
                             .SetAttribute("Id", setCmdLineActionId)
-                            .SetAttribute("Property", wAction.Execute == Execute.immediate ? quietExecAction.CommandLineProperty : wAction.Id)
+                            .SetAttribute("Property", quietExecAction.Execute == Execute.immediate ? quietExecAction.CommandLineProperty : quietExecAction.Id)
                             .SetAttribute("Value", "\"" + quietExecAction.AppPath.ExpandCommandPath() + "\" " + quietExecAction.Args.ExpandCommandPath())
                             .AddAttributes(quietExecAction.Attributes));
 
@@ -3024,10 +3008,10 @@ namespace WixSharp
                             .SetAttribute("Id", cmdLineActionId)
                             .SetAttribute(CABinarykeyAttrName, "Wix4UtilCA_X86") // in WiX4: WixCA -> WixUiCa_X86 (just a guess)
                             .SetAttribute("DllEntry", quietExecAction.ActionName)
-                            .SetAttribute("Return", wAction.Return)
-                            .SetAttribute("Impersonate", wAction.Impersonate)
-                            .SetAttribute("Execute", wAction.Execute)
-                            .AddAttributes(wAction.Attributes));
+                            .SetAttribute("Return", quietExecAction.Return)
+                            .SetAttribute("Impersonate", quietExecAction.Impersonate)
+                            .SetAttribute("Execute", quietExecAction.Execute)
+                            .AddAttributes(quietExecAction.Attributes));
 
                     sequences.ForEach(sequence =>
                         sequence.Add(
@@ -3062,18 +3046,16 @@ namespace WixSharp
                                 .SetAttribute("Id", roollbackActionId)
                                 .SetAttribute(CABinarykeyAttrName, "WixUiCa_X86") // in WiX4: WixCA -> WixUiCa_X86 (just a guess)
                                 .SetAttribute("DllEntry", quietExecAction.ActionName)
-                                .SetAttribute("Return", wAction.Return)
-                                .SetAttribute("Impersonate", wAction.Impersonate)
+                                .SetAttribute("Return", quietExecAction.Return)
+                                .SetAttribute("Impersonate", quietExecAction.Impersonate)
                                 .SetAttribute("Execute", Execute.rollback)
-                                .AddAttributes(wAction.Attributes));
+                                .AddAttributes(quietExecAction.Attributes));
                     }
 
                     wProject.Include(WixExtension.Util);
                 }
-                else if (wAction is InstalledFileAction)
+                else if (wAction is InstalledFileAction installedFileAction)
                 {
-                    var fileAction = (InstalledFileAction)wAction;
-
                     sequences.ForEach(sequence =>
                         sequence.Add(
                             new XElement("Custom",
@@ -3083,15 +3065,15 @@ namespace WixSharp
 
                     product.AddElement(
                         new XElement("CustomAction",
-                                new XAttribute("Id", wAction.Id),
-                                new XAttribute("ExeCommand", fileAction.Args.ExpandCommandPath()),
-                                new XAttribute("FileRef", fileAction.Key))
-                            .SetAttribute("Return", wAction.Return)
-                            .SetAttribute("Impersonate", wAction.Impersonate)
-                            .SetAttribute("Execute", wAction.Execute)
-                            .AddAttributes(wAction.Attributes));
+                                new XAttribute("Id", installedFileAction.Id),
+                                new XAttribute("ExeCommand", installedFileAction.Args.ExpandCommandPath()),
+                                new XAttribute("FileRef", installedFileAction.Key))
+                            .SetAttribute("Return", installedFileAction.Return)
+                            .SetAttribute("Impersonate", installedFileAction.Impersonate)
+                            .SetAttribute("Execute", installedFileAction.Execute)
+                            .AddAttributes(installedFileAction.Attributes));
 
-                    if ((fileAction.Execute == Execute.deferred) && fileAction.Rollback.IsNotEmpty())
+                    if ((installedFileAction.Execute == Execute.deferred) && installedFileAction.Rollback.IsNotEmpty())
                     {
                         sequences.ForEach(sequence =>
                             sequence.Add(new XElement("Custom",
@@ -3102,20 +3084,18 @@ namespace WixSharp
                         product.AddElement(
                             new XElement("CustomAction",
                                     new XAttribute("Id", roollbackActionId),
-                                    new XAttribute("ExeCommand", fileAction.RollbackArg == null
-                                        ? fileAction.Args.ExpandCommandPath()
-                                        : fileAction.RollbackArg.ExpandCommandPath()),
-                                    new XAttribute("FileRef", fileAction.Rollback))
-                                .SetAttribute("Return", wAction.Return)
-                                .SetAttribute("Impersonate", wAction.Impersonate)
+                                    new XAttribute("ExeCommand", installedFileAction.RollbackArg == null
+                                        ? installedFileAction.Args.ExpandCommandPath()
+                                        : installedFileAction.RollbackArg.ExpandCommandPath()),
+                                    new XAttribute("FileRef", installedFileAction.Rollback))
+                                .SetAttribute("Return", installedFileAction.Return)
+                                .SetAttribute("Impersonate", installedFileAction.Impersonate)
                                 .SetAttribute("Execute", Execute.rollback)
-                                .AddAttributes(wAction.Attributes));
+                                .AddAttributes(installedFileAction.Attributes));
                     }
                 }
-                else if (wAction is BinaryFileAction)
+                else if (wAction is BinaryFileAction binaryAction)
                 {
-                    var binaryAction = (BinaryFileAction)wAction;
-
                     sequences.ForEach(sequence =>
                         sequence.Add(
                             new XElement("Custom",
@@ -3125,13 +3105,13 @@ namespace WixSharp
 
                     product.AddElement(
                         new XElement("CustomAction",
-                                new XAttribute("Id", wAction.Id),
+                                new XAttribute("Id", binaryAction.Id),
                                 new XAttribute("ExeCommand", binaryAction.Args.ExpandCommandPath()),
                                 new XAttribute(CABinarykeyAttrName, binaryAction.Key))
-                            .SetAttribute("Return", wAction.Return)
-                            .SetAttribute("Impersonate", wAction.Impersonate)
-                            .SetAttribute("Execute", wAction.Execute)
-                            .AddAttributes(wAction.Attributes));
+                            .SetAttribute("Return", binaryAction.Return)
+                            .SetAttribute("Impersonate", binaryAction.Impersonate)
+                            .SetAttribute("Execute", binaryAction.Execute)
+                            .AddAttributes(binaryAction.Attributes));
 
                     if ((binaryAction.Execute == Execute.deferred) && binaryAction.Rollback.IsNotEmpty())
                     {
@@ -3148,16 +3128,14 @@ namespace WixSharp
                                         ? binaryAction.Args.ExpandCommandPath()
                                         : binaryAction.RollbackArg.ExpandCommandPath()),
                                 new XAttribute(CABinarykeyAttrName, binaryAction.Rollback))
-                                .SetAttribute("Return", wAction.Return)
-                                .SetAttribute("Impersonate", wAction.Impersonate)
+                                .SetAttribute("Return", binaryAction.Return)
+                                .SetAttribute("Impersonate", binaryAction.Impersonate)
                                 .SetAttribute("Execute", Execute.rollback)
-                                .AddAttributes(wAction.Attributes));
+                                .AddAttributes(binaryAction.Attributes));
                     }
                 }
-                else if (wAction is PathFileAction)
+                else if (wAction is PathFileAction fileAction)
                 {
-                    var fileAction = (PathFileAction)wAction;
-
                     sequences.ForEach(sequence =>
                         sequence.Add(
                             new XElement("Custom",
@@ -3167,11 +3145,11 @@ namespace WixSharp
 
                     var actionElement = product.AddElement(
                         new XElement("CustomAction",
-                                new XAttribute("Id", wAction.Id),
+                                new XAttribute("Id", fileAction.Id),
                                 new XAttribute("ExeCommand", "\"" + fileAction.AppPath.ExpandCommandPath() + "\" " + fileAction.Args.ExpandCommandPath()))
-                            .SetAttribute("Return", wAction.Return)
-                            .SetAttribute("Impersonate", wAction.Impersonate)
-                            .SetAttribute("Execute", wAction.Execute)
+                            .SetAttribute("Return", fileAction.Return)
+                            .SetAttribute("Impersonate", fileAction.Impersonate)
+                            .SetAttribute("Execute", fileAction.Execute)
                             .AddAttributes(fileAction.Attributes));
 
                     Dir installedDir = Array.Find(wProject.Dirs, (x) => x.Name == fileAction.WorkingDir);
@@ -3193,8 +3171,8 @@ namespace WixSharp
                                     new XAttribute("ExeCommand", fileAction.RollbackArg.IsEmpty()
                                         ? "\"" + fileAction.AppPath.ExpandCommandPath() + "\" " + fileAction.Args.ExpandCommandPath()
                                         : "\"" + fileAction.AppPath.ExpandCommandPath() + "\" " + fileAction.RollbackArg.ExpandCommandPath()))
-                                .SetAttribute("Return", wAction.Return)
-                                .SetAttribute("Impersonate", wAction.Impersonate)
+                                .SetAttribute("Return", fileAction.Return)
+                                .SetAttribute("Impersonate", fileAction.Impersonate)
                                 .SetAttribute("Execute", Execute.rollback)
                                 .AddAttributes(fileAction.Attributes));
 

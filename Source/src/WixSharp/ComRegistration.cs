@@ -699,13 +699,13 @@ namespace WixSharp
             if (Id.IsNullOrEmpty())
                 throw new ValidationException($"{nameof(Verb)} must contain the name of an executable or command in the {nameof(Id)} property.");
 
-            if (!(context.Parent is Extension))
+            if (!(context.Parent is Extension extension))
             {
                 throw new ValidationException($"{nameof(Verb)} element must be a child of {nameof(Extension)}.");
             }
             else
             {
-                isParentAdvertised = (context.Parent as Extension)?.Advertise == true;
+                isParentAdvertised = extension?.Advertise == true;
             }
 
             if (!isParentAdvertised)

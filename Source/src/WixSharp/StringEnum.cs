@@ -85,14 +85,14 @@ namespace WixSharp
         public override bool Equals(object obj)
         {
 
-            if (!(obj is StringEnum<T>))
+            if (!(obj is StringEnum<T> @enum))
             {
-                if (obj is string)
-                    return (obj as string) == this;
+                if (obj is string s)
+                    return s == this;
                 else
                     return false;
             }
-            return this == (StringEnum<T>)obj;
+            return this == @enum;
 
         }
         /// <summary>

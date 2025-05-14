@@ -327,9 +327,9 @@ namespace WixSharp
         {
             get
             {
-                if (Value is byte[])
+                if (Value is byte[] bytes)
                 {
-                    string hex = BitConverter.ToString(Value as byte[]);
+                    string hex = BitConverter.ToString(bytes);
                     return hex.Replace("-", "");
                 }
                 else
@@ -354,9 +354,8 @@ namespace WixSharp
                 if (Type != null)
                     return Type;
 
-                if (Value is String)
+                if (Value is String value)
                 {
-                    var value = Value as string;
                     if (value.Contains("\n"))
                         return "multiString";
                     else if (value.Contains("%"))

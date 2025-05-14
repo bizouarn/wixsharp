@@ -106,8 +106,8 @@ namespace WixSharp
 
             foreach (WixEntity item in items)
             {
-                if (item is Property)
-                    props.Add(item as Property);
+                if (item is Property property)
+                    props.Add(property);
                 else
                     throw new Exception(item.GetType().Name + " is not expected to be a child of WixSharp.ODBCDataSource");
             }

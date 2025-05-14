@@ -104,9 +104,9 @@ namespace WixSharp
         public override bool Equals(object obj)
         {
 
-            if (!(obj is Id)) return false;
+            if (!(obj is Id id)) return false;
 
-            return this == (Id)obj;
+            return this == id;
 
         }
         /// <summary>

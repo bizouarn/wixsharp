@@ -325,7 +325,7 @@ namespace WixSharp
                 }
                 else
                 {
-                    if (type.GenericTypeArguments.Count() == 1)
+                    if (type.GenericTypeArguments.Length == 1)
                         throw new ValidationException($"Error: The generic type argument {type.GenericTypeArguments.First()} must implement {userContentInterfaceName} interface");
                     else
                         throw new ValidationException($"Error: The generic type argument of {type} must implement {userContentInterfaceName} interface");

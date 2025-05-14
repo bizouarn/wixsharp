@@ -158,7 +158,7 @@ namespace WixSharp
                 {
                     //add index to the items with the same key
                     var similarNamedItems = allItems.Where(x => x.StartsWith(name)).ToArray();
-                    items.Add(name + similarNamedItems.Count() + "=" + value);
+                    items.Add(name + similarNamedItems.Length + "=" + value);
                 }
                 else
                 {

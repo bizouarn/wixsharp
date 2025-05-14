@@ -1015,8 +1015,8 @@ namespace WixSharp
         {
             Dir firstDirWithItems = Dirs.First();
 
-            while (firstDirWithItems.Shortcuts.Count() == 0 &&
-                   firstDirWithItems.Dirs.Count() == 1 &&
+            while (firstDirWithItems.Shortcuts.Length == 0 &&
+                   firstDirWithItems.Dirs.Length == 1 &&
                    firstDirWithItems.Files.None())
             {
                 firstDirWithItems = firstDirWithItems.Dirs.First();

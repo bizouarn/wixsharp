@@ -1408,7 +1408,7 @@ namespace WixSharp
         //auto-assign InstallDirDefaultId id for installation directory (the first directory that has multiple items)
         static string AutoAssignInstallDirId(Dir[] wDirs, string dirId)
         {
-            if (wDirs.Count() != 0)
+            if (wDirs.Length != 0)
             {
                 Dir firstDirWithItems = wDirs.First();
 
@@ -2202,7 +2202,7 @@ namespace WixSharp
         {
             wProject.ResolveWildCards(Compiler.AutoGeneration.IgnoreWildCardEmptyDirectories);
 
-            if (wProject.Dirs.Count() == 0)
+            if (wProject.Dirs.Length == 0)
             {
                 //WIX/MSI does not like no-directory deployments thus create fake one
                 string dummyDir = @"%ProgramFiles%";

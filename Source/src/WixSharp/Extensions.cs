@@ -361,7 +361,7 @@ namespace WixSharp
                             string name = tokens[0].Trim();
 
                             string value = "";
-                            if (tokens.Count() > 1)
+                            if (tokens.Length > 1)
                                 value = tokens[1].Trim();
 
                             retval[name] = value;

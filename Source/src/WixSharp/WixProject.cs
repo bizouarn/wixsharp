@@ -136,7 +136,7 @@ namespace WixSharp
         /// <value>
         ///   <c>true</c> if this project is multi language; otherwise, <c>false</c>.
         /// </value>
-        public bool IsMultiLanguage => Language.Split(',', ';').Count() > 1;
+        public bool IsMultiLanguage => Language.Split(',', ';').Length > 1;
 
         /// <summary>
         /// Gets the default language
